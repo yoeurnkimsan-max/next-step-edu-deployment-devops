@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,13 +18,15 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
 
     @Bean
-    JwtAuthenticationProvider configJwtAuthenticationProvider(@Qualifier("refreshTokenJwtDecoder") JwtDecoder refreshTokenJwtDecoder) {
+    JwtAuthenticationProvider configJwtAuthenticationProvider(
+            @Qualifier("refreshTokenJwtDecoder") JwtDecoder refreshTokenJwtDecoder) {
         JwtAuthenticationProvider auth = new JwtAuthenticationProvider(refreshTokenJwtDecoder);
         return auth;
     }
@@ -34,6 +37,7 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
+
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config) throws Exception {
@@ -41,15 +45,17 @@ public class SecurityConfig {
     }
 
     @Bean
-    SecurityFilterChain configureApiSecurity(HttpSecurity http, @Qualifier("accessTokenjwtDecoder") JwtDecoder jwtDecoder) throws Exception {
+    SecurityFilterChain configureApiSecurity(HttpSecurity http,
+            @Qualifier("accessTokenjwtDecoder") JwtDecoder jwtDecoder) throws Exception {
 
         // Endpoint Security config
         http.authorizeHttpRequests(endpoint -> endpoint
                 .requestMatchers("/api/v1/auth/**").permitAll()
                 .requestMatchers("/api/v1/cloud/upload/**").permitAll()
+                .requestMatchers("/api/v1/universities/**").permitAll()
+                .requestMatchers("/api/v1/university-contacts/**").permitAll()
                 .requestMatchers("/api/v1/profile/**").authenticated()
                 .anyRequest().authenticated());
-
 
         http.oauth2ResourceServer(oauth2 -> oauth2
                 .jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder)));
