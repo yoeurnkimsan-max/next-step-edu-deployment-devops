@@ -6,8 +6,10 @@ import com.NextStepEdu.services.UniversityService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,9 +20,12 @@ public class UniversityController {
 
     private final UniversityService universityService;
 
-    @PostMapping
-    public ResponseEntity<UniversityResponse> createUniversity(@Valid @RequestBody UniversityRequest request) {
-        UniversityResponse response = universityService.createUniversity(request);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<UniversityResponse> createUniversity(
+            @Valid @ModelAttribute UniversityRequest request,
+            @RequestParam(value = "logoUrl", required = false) MultipartFile logoUrl,
+            @RequestParam(value = "coverImageUrl", required = false) MultipartFile coverImageUrl) {
+        UniversityResponse response = universityService.createUniversity(request, logoUrl, coverImageUrl);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -48,11 +53,13 @@ public class UniversityController {
         return ResponseEntity.ok(responses);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<UniversityResponse> updateUniversity(
             @PathVariable Integer id,
-            @Valid @RequestBody UniversityRequest request) {
-        UniversityResponse response = universityService.updateUniversity(id, request);
+            @Valid @ModelAttribute UniversityRequest request,
+            @RequestParam(value = "logoUrl", required = false) MultipartFile logoUrl,
+            @RequestParam(value = "coverImageUrl", required = false) MultipartFile coverImageUrl) {
+        UniversityResponse response = universityService.updateUniversity(id, request, logoUrl, coverImageUrl);
         return ResponseEntity.ok(response);
     }
 

@@ -20,6 +20,8 @@ public interface UniversityMapper {
     @Mapping(target = "programs", ignore = true)
     @Mapping(target = "contacts", ignore = true)
     @Mapping(target = "scholarships", ignore = true)
+    @Mapping(target = "logoUrl", ignore = true)
+    @Mapping(target = "coverImageUrl", ignore = true)
     UniversityModel toModel(UniversityRequest request);
 
     @Mapping(target = "id", ignore = true)
@@ -29,5 +31,7 @@ public interface UniversityMapper {
     @Mapping(target = "programs", ignore = true)
     @Mapping(target = "contacts", ignore = true)
     @Mapping(target = "scholarships", ignore = true)
+    @Mapping(target = "logoUrl", ignore = true)
+    @Mapping(target = "coverImageUrl", ignore = true)
     void updateModel(UniversityRequest request, @MappingTarget UniversityModel model);
 }

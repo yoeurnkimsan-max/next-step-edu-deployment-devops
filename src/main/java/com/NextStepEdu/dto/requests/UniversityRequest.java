@@ -13,8 +13,6 @@ public class UniversityRequest {
     private String name;
 
     private String slug;
-    private String logoUrl;
-    private String coverImageUrl;
     private String description;
     private String country;
     private String city;
