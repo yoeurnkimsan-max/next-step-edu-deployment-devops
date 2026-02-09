@@ -32,7 +32,7 @@ public class FacultyModel {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "university_id", nullable = false)
+    @JoinColumn(name = "university_id", nullable = true)
     private UniversityModel university;
 
 

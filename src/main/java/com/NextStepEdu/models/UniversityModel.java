@@ -59,12 +59,6 @@ public class UniversityModel {
     @OneToMany(mappedBy = "university", cascade = CascadeType.ALL)
     private List<FacultyModel> faculties;
 
-    @OneToMany(mappedBy = "university", cascade = CascadeType.ALL)
-    private List<ProgramModel> programs;
-
-    @OneToMany(mappedBy = "university", cascade = CascadeType.ALL)
-    private List<UniversityContactModel> contacts;
-
-    @OneToMany(mappedBy = "university", cascade = CascadeType.ALL)
-    private List<ScholarshipModel> scholarships;
+    // Other relations (programs/contacts/scholarships) were removed for now because their
+    // models are not implemented as JPA entities in this codebase yet.
 }

@@ -26,11 +26,14 @@ public class FacultyServiceImpl implements FacultyService {
     @Override
     @Transactional
     public FacultyResponse create(FacultyRequest request) {
-        UniversityModel university = getUniversityOrThrow(request.universityId());
         String normalizedName = request.name().trim();
 
-        if (facultyRepository.existsByUniversity_IdAndNameIgnoreCase(university.getId(), normalizedName)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Faculty already exists in this university");
+        UniversityModel university = null;
+        if (request.universityId() != null) {
+            university = getUniversityOrThrow(request.universityId());
+            if (facultyRepository.existsByUniversity_IdAndNameIgnoreCase(university.getId(), normalizedName)) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Faculty already exists in this university");
+            }
         }
 
         FacultyModel faculty = new FacultyModel();
@@ -72,13 +75,18 @@ public class FacultyServiceImpl implements FacultyService {
         FacultyModel faculty = facultyRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Faculty not found"));
 
-        UniversityModel university = getUniversityOrThrow(request.universityId());
         String normalizedName = request.name().trim();
 
-        if (!faculty.getUniversity().getId().equals(university.getId())
-                || !faculty.getName().equalsIgnoreCase(normalizedName)) {
-            if (facultyRepository.existsByUniversity_IdAndNameIgnoreCase(university.getId(), normalizedName)) {
-                throw new ResponseStatusException(HttpStatus.CONFLICT, "Faculty already exists in this university");
+        UniversityModel university = null;
+        if (request.universityId() != null) {
+            university = getUniversityOrThrow(request.universityId());
+            UUID currentUniversityId = faculty.getUniversity() == null ? null : faculty.getUniversity().getId();
+            if (currentUniversityId == null
+                    || !currentUniversityId.equals(university.getId())
+                    || !faculty.getName().equalsIgnoreCase(normalizedName)) {
+                if (facultyRepository.existsByUniversity_IdAndNameIgnoreCase(university.getId(), normalizedName)) {
+                    throw new ResponseStatusException(HttpStatus.CONFLICT, "Faculty already exists in this university");
+                }
             }
         }
 
@@ -103,12 +111,14 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     private FacultyResponse toResponse(FacultyModel faculty) {
+        UUID universityId = faculty.getUniversity() == null ? null : faculty.getUniversity().getId();
+        String universityName = faculty.getUniversity() == null ? null : faculty.getUniversity().getName();
         return new FacultyResponse(
                 faculty.getId(),
                 faculty.getName(),
                 faculty.getDescription(),
-                faculty.getUniversity().getId(),
-                faculty.getUniversity().getName()
+                universityId,
+                universityName
         );
     }
 }
