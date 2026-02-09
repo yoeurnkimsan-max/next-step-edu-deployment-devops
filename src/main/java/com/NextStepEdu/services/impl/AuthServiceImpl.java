@@ -71,7 +71,7 @@ public class AuthServiceImpl implements AuthService {
                 String scope = authentication.getAuthorities()
                                 .stream()
                                 .map(GrantedAuthority::getAuthority)
-                                .filter(role -> role.startsWith("ROLE_")) // ✅ Only include your custom roles
+                                .map(role -> role.startsWith("ROLE_") ? role.substring(5) : role)
                                 .collect(Collectors.joining(" "));
 
                 Instant now = Instant.now();
