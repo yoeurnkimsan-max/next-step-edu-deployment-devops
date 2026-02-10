@@ -31,8 +31,10 @@ public class ScholarshipController {
     }
 
     @PostMapping
-    public ResponseEntity<ScholarshipModel> createScholarship(@Valid @RequestBody ScholarshipRequest scholarshipRequest) {
-        ScholarshipModel createdScholarship = scholarshipService.create(scholarshipRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdScholarship);
+    public ResponseEntity<?> createScholarship(@Valid @RequestBody ScholarshipRequest scholarshipRequest) {
+//        ScholarshipModel createdScholarship = scholarshipService.create(scholarshipRequest);
+
+        return ResponseEntity.ok(scholarshipRequest);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(createdScholarship);
     }
 }

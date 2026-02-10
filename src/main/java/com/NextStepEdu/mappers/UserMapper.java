@@ -7,7 +7,5 @@ import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
-
     AuthResponse toAuthResponse(UserModel user);
-
 }
