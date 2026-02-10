@@ -1,4 +1,7 @@
 package com.NextStepEdu.repositories;
 
-public interface ScholarshipRepository {
+import com.NextStepEdu.models.ScholarshipModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ScholarshipRepository extends JpaRepository<ScholarshipModel,Integer> {
 }
