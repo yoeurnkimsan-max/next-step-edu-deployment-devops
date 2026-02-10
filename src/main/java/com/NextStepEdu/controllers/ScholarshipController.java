@@ -1,16 +1,17 @@
 package com.NextStepEdu.controllers;
 
+import com.NextStepEdu.dto.requests.ScholarshipRequest;
 import com.NextStepEdu.dto.responses.ScholarshipResponse;
 import com.NextStepEdu.models.ScholarshipModel;
 import com.NextStepEdu.services.ScholarshipService;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -43,7 +44,7 @@ public class ScholarshipController {
         return ResponseEntity.ok(ScholarshipResponse.fromEntity(scholarship));
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+   /* @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ScholarshipResponse> createScholarship(
             @RequestParam String name,
             @RequestParam(required = false) String description,
@@ -65,6 +66,15 @@ public class ScholarshipController {
                 programId, universityId, logo, coverImage
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(ScholarshipResponse.fromEntity(scholarship));
+    }*/
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> createScholarship(
+            @Validated @RequestPart("data") ScholarshipRequest request,
+            @RequestPart(value = "logo", required = false) MultipartFile logo,
+            @RequestPart(value = "coverImage", required = false) MultipartFile coverImage
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(coverImage);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
