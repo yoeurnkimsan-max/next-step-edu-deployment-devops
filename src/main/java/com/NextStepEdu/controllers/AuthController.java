@@ -42,7 +42,6 @@ public class AuthController {
             @ApiResponse(responseCode = "201", description = "Registered"),
             @ApiResponse(responseCode = "400", description = "Validation error")
     })
-
     public ResponseEntity<?> register(
             @RequestParam String email,
             @RequestParam String password,
@@ -51,6 +50,7 @@ public class AuthController {
             @RequestParam String phone,
             @RequestParam(required = false) MultipartFile image
     ) {
+        System.out.println("Inside Register Controller");
         authService.register(email, password, firstname, lastname, phone, image);
         return ResponseEntity.ok("Registered successfully");
     }
@@ -60,6 +60,7 @@ public class AuthController {
     }
     @PostMapping("/refresh-token")
     AuthResponse refreshToekn(@Valid @RequestBody LoginRequest loginRequest) {
+
         return  authService.login(loginRequest);
 
     }

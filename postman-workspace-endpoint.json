@@ -1,0 +1,1176 @@
+{
+  "info": {
+    "_postman_id": "8f26a742-a826-4d1c-a848-7e5cda276372",
+    "name": "Next-Step-edu-API",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52157067"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var response = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"client_access_token\", response.accessToken)"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"user@gmail.com\",\n    \"password\": \"yourPassword123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "user@gmail.com",
+                  "type": "text",
+                  "uuid": "4a538a9b-3f83-4be4-b759-65a31bf2f7f1"
+                },
+                {
+                  "key": "password",
+                  "value": "yourPassword123",
+                  "type": "text",
+                  "uuid": "780d5258-f419-4140-880b-078f0a782a7d"
+                },
+                {
+                  "key": "firstname",
+                  "value": "John",
+                  "type": "text",
+                  "uuid": "6f30ee8f-a339-4d81-bc0d-c4a10fe49923"
+                },
+                {
+                  "key": "lastname",
+                  "value": "Doe",
+                  "type": "text",
+                  "uuid": "fee72301-0706-4b29-b6ba-fc54df98bf40"
+                },
+                {
+                  "key": "phone",
+                  "value": "+1234567890",
+                  "type": "text",
+                  "uuid": "345ca5d1-c9e0-47b1-841c-a72d7240dea3"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "41c42286-b4df-493f-9266-67056c2cd5dd",
+                  "src": "postman-cloud:///1f1032d6-baa2-4380-aa1c-b136a8c3ed02"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Scholarship",
+      "item": [
+        {
+          "name": "Create",
+          "protocolProfileBehavior": {
+            "disabledSystemHeaders": {}
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Girl Award",
+                  "type": "text",
+                  "uuid": "6340d140-b75a-4bb0-89d4-e53acf34c0a2",
+                  "disabled": true
+                },
+                {
+                  "key": "description",
+                  "value": "fseff",
+                  "type": "text",
+                  "uuid": "3488dbd6-47d3-4ba6-acb9-2885ad719965",
+                  "disabled": true
+                },
+                {
+                  "key": "level",
+                  "value": "3",
+                  "type": "text",
+                  "uuid": "e544e0d8-8c90-4ff2-afe6-1340a84ee6db",
+                  "disabled": true
+                },
+                {
+                  "key": "benefits",
+                  "value": "Best Scholarship",
+                  "type": "text",
+                  "uuid": "52a50865-b7f7-4a97-a21d-1436f4d56bfe",
+                  "disabled": true
+                },
+                {
+                  "key": "requirements",
+                  "value": "Student, Bachelor degree",
+                  "type": "text",
+                  "uuid": "ed5e7da7-a280-4e3f-8ebf-747dbae4fb7c",
+                  "disabled": true
+                },
+                {
+                  "key": "howToApply",
+                  "value": "Just click the link stupid",
+                  "type": "text",
+                  "uuid": "2af04b06-415f-4b4a-9da6-cab7d87e2aba",
+                  "disabled": true
+                },
+                {
+                  "key": "applyLink",
+                  "value": "facebook.com",
+                  "type": "text",
+                  "uuid": "de1269a4-05de-4bc3-b88f-b859dd2b7ab5",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "ACTIVE",
+                  "type": "text",
+                  "uuid": "836109ea-068d-4cff-bda2-cf21b26a67c1",
+                  "disabled": true
+                },
+                {
+                  "key": "deadline",
+                  "value": "2026-12-31T23:59:59",
+                  "type": "text",
+                  "uuid": "cfdf0ca0-803a-4b2c-b25e-b43924e96fbd",
+                  "disabled": true
+                },
+                {
+                  "key": "programId",
+                  "value": "1",
+                  "type": "text",
+                  "uuid": "b7a124c1-e94f-4b55-bc29-4267125ca3c1",
+                  "disabled": true
+                },
+                {
+                  "key": "universityId",
+                  "value": "1",
+                  "type": "text",
+                  "uuid": "6a64a2af-ce01-4e52-9b58-2805d7c6f8c7",
+                  "disabled": true
+                },
+                {
+                  "key": "logo",
+                  "type": "file",
+                  "uuid": "45aa3e53-fa19-4ebb-86af-084f8a6116eb",
+                  "src": "/Users/mac/Development/sample-upload-image/pngtree-scholarships-concept-graduation-hat-on-books-png-image_13118902.png"
+                },
+                {
+                  "key": "coverImage",
+                  "type": "file",
+                  "uuid": "d79b184d-888a-4cdd-a7a9-b7f5443a2973",
+                  "src": "/Users/mac/Development/sample-upload-image/pngtree-scholarships-concept-graduation-hat-on-books-png-image_13118902.png"
+                },
+                {
+                  "key": "data",
+                  "value": "{\n  \"name\": \"Scholarship A\",\n  \"description\": \"Full tuition scholarship\",\n  \"level\": 1,\n  \"benefits\": \"Tuition, Stipend\",\n  \"requirements\": \"GPA>3.5\",\n  \"howToApply\": \"Apply online\",\n  \"applyLink\": \"https://example.com/apply\",\n  \"deadline\": \"2026-03-01T12:00:00\",\n  \"programId\": 1,\n  \"universityId\":1,\n  \"status\":\"ACTIVE\"\n}",
+                  "type": "text",
+                  "uuid": "3e35743a-fbbb-4c76-98a4-1d6b175662ae"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{public_route_api}}/scholarship",
+              "host": [
+                "{{public_route_api}}"
+              ],
+              "path": [
+                "scholarship"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "data",
+                  "value": "{ \n  \"name\": \"Scholarship 1 update\",\n  \"description\": \"Full tuition scholarship\",\n  \"level\": 1,\n  \"benefits\": \"Tuition, Stipend\",\n  \"requirements\": \"GPA>3.5\",\n  \"howToApply\": \"Apply online\",\n  \"applyLink\": \"https://example.com/apply\",\n  \"deadline\": \"2026-03-01T12:00:00\",\n  \"programId\": 1,\n  \"universityId\":1,\n  \"status\":\"ACTIVE\"\n}",
+                  "description": "text-json",
+                  "type": "text",
+                  "uuid": "fb4a3e2e-2d61-4973-bf59-d43893d61a63"
+                },
+                {
+                  "key": "logo",
+                  "type": "file",
+                  "uuid": "821cc0a9-9c98-4559-971b-9052dec9d047",
+                  "src": "/Users/mac/Development/sample-upload-image/pngtree-scholarships-concept-graduation-hat-on-books-png-image_13118902.png"
+                },
+                {
+                  "key": "coverImage",
+                  "type": "file",
+                  "uuid": "c69b4566-dc72-46b3-8f3a-368f4b1eed21",
+                  "src": "/Users/mac/Development/sample-upload-image/pngtree-scholarships-concept-graduation-hat-on-books-png-image_13118902.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{public_route_api}}/scholarship/1",
+              "host": [
+                "{{public_route_api}}"
+              ],
+              "path": [
+                "scholarship",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Scholarships",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{public_route_api}}/scholarship?page=0&size=10&sortDir=desc",
+              "host": [
+                "{{public_route_api}}"
+              ],
+              "path": [
+                "scholarship"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortDir",
+                  "value": "desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Scholarship",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"san@gmail.com\",\n    \"password\": \"saffefjskf@FE23\"\n}"
+            },
+            "url": {
+              "raw": "{{public_route_api}}/scholarship/3",
+              "host": [
+                "{{public_route_api}}"
+              ],
+              "path": [
+                "scholarship",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{public_route_api}}/scholarship/5",
+              "host": [
+                "{{public_route_api}}"
+              ],
+              "path": [
+                "scholarship",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Scholarship Contact",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"label\": \"Admissions Office\",\n    \"email\": \"admissions@example.com\",\n    \"phone\": \"+1234567890\",\n    \"websiteUrl\": \"https://example.com\",\n    \"scholarshipId\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/scholarship-contact",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "scholarship-contact"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/scholarship-contact",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "scholarship-contact"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get One By ID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"san@gmail.com\",\n    \"password\": \"saffefjskf@FE23\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/v1/scholarship-contact/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "scholarship-contact",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Scholarship ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/v1/scholarship-contact/scholarship/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "scholarship-contact",
+                "scholarship",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/v1/scholarship-contact/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "scholarship-contact",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{client_access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/v1/scholarship-contact/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "scholarship-contact",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "University",
+      "item": [
+        {
+          "name": "Create U-Contact",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"label\": \"Admissions Office\",\r\n  \"email\": \"admissions@university.edu\",\r\n  \"phone\": \"+1-555-0123\",\r\n  \"websiteUrl\": \"https://www.university.edu/admissions\",\r\n  \"universityId\": 34\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/university-contacts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "university-contacts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create University",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "RUPP",
+                  "type": "text",
+                  "uuid": "e5728c5f-9267-4b66-ba10-3e7bda8fab6e"
+                },
+                {
+                  "key": "slug",
+                  "value": "rupp",
+                  "type": "text",
+                  "uuid": "b87102fe-8420-4b1b-accf-25f71d97b863"
+                },
+                {
+                  "key": "country",
+                  "value": "cambodai",
+                  "type": "text",
+                  "uuid": "3f2f924f-2d11-454f-a6c4-1e8c7487e7c7"
+                },
+                {
+                  "key": "city",
+                  "value": "Phnom Penh ",
+                  "type": "text",
+                  "uuid": "8b4b6003-c290-41dd-8e7b-86332c2cc7e9"
+                },
+                {
+                  "key": "description",
+                  "value": "the best",
+                  "type": "text",
+                  "uuid": "2af32ee7-851d-4281-b63a-6828f4bab87d"
+                },
+                {
+                  "key": "logoUrl",
+                  "type": "file",
+                  "uuid": "1f9ee372-f4df-4865-bb95-37af71275524",
+                  "src": "Amxbb_8BZ/room1.jpg"
+                },
+                {
+                  "key": "coverImageUrl",
+                  "type": "file",
+                  "uuid": "d8c80a47-270f-409d-8422-80aaa65fd780",
+                  "src": "6Du7lzGML/room2.jpg"
+                },
+                {
+                  "key": "status",
+                  "value": "active",
+                  "type": "text",
+                  "uuid": "3b97c4b3-6256-4e56-bba7-0dac87e931b4"
+                },
+                {
+                  "key": "officialWebsite",
+                  "value": "https://www.rupp.edu.kh/",
+                  "type": "text",
+                  "uuid": "6195aadd-036f-47bb-a5fd-c7afc91195c3"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/universities",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "universities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get U-Contact",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"san@gmail.com\",\n    \"password\": \"saffefjskf@FE23\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/university-contacts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "university-contacts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get University",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"san@gmail.com\",\n    \"password\": \"saffefjskf@FE23\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/universities",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "universities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update U-contact",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"Admissions Office\",\n  \"email\": \"admissions@university.edu\",\n  \"phone\": \"+1-555-0123\",\n  \"websiteUrl\": \"https://www.university.edu/admissions\",\n  \"universityId\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/university-contacts/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "university-contacts",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update University",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "logoUrl",
+                  "type": "file",
+                  "uuid": "402eb5d1-4e99-48bf-b660-d2aa43dee4cd",
+                  "src": "/C:/Users/CHORY Chanrady/Downloads/Harvard-logo.png"
+                },
+                {
+                  "key": "coverImageUrl",
+                  "type": "file",
+                  "uuid": "665065db-0c39-4ee3-95f6-f904e2006832",
+                  "src": "/C:/Users/CHORY Chanrady/Downloads/Harvard_University_Cover.jpg"
+                },
+                {
+                  "key": "name",
+                  "value": "Harvard University",
+                  "type": "text",
+                  "uuid": "f96daec0-0379-4779-b3b6-42dcd96302bb"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/universities/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "universities",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete University",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "logoUrl",
+                  "type": "file",
+                  "uuid": "402eb5d1-4e99-48bf-b660-d2aa43dee4cd",
+                  "src": "/C:/Users/CHORY Chanrady/Downloads/Harvard-logo.png"
+                },
+                {
+                  "key": "coverImageUrl",
+                  "type": "file",
+                  "uuid": "665065db-0c39-4ee3-95f6-f904e2006832",
+                  "src": "/C:/Users/CHORY Chanrady/Downloads/Harvard_University_Cover.jpg"
+                },
+                {
+                  "key": "name",
+                  "value": "Harvard University",
+                  "type": "text",
+                  "uuid": "f96daec0-0379-4779-b3b6-42dcd96302bb"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/universities/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "universities",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete U-Contact",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "logoUrl",
+                  "type": "file",
+                  "uuid": "402eb5d1-4e99-48bf-b660-d2aa43dee4cd",
+                  "src": "/C:/Users/CHORY Chanrady/Downloads/Harvard-logo.png"
+                },
+                {
+                  "key": "coverImageUrl",
+                  "type": "file",
+                  "uuid": "665065db-0c39-4ee3-95f6-f904e2006832",
+                  "src": "/C:/Users/CHORY Chanrady/Downloads/Harvard_University_Cover.jpg"
+                },
+                {
+                  "key": "name",
+                  "value": "Harvard University",
+                  "type": "text",
+                  "uuid": "f96daec0-0379-4779-b3b6-42dcd96302bb"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/university-contacts/34",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "university-contacts",
+                "34"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Faculty",
+      "item": [
+        {
+          "name": "Create Faculties",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJraWQiOiIwYmY2YmVmZi0yZWNjLTQ0NmUtOTZjYy05NGUzMTAzMWVmN2UiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ5b3VAZXhhbXBsZS5jb20iLCJhdWQiOlsiTmV4dEpzIiwiQW5kcm9pZCIsIklPUyJdLCJyb2xlIjoiVVNFUiBBRE1JTiBGQUNUT1JfUEFTU1dPUkQiLCJzY29wZSI6IlVTRVIgQURNSU4gRkFDVE9SX1BBU1NXT1JEIiwiaXNzIjoidGFza2Zsb3ctYXBpIiwiZXhwIjoxNzcwNjEzMjgxLCJpYXQiOjE3NzA2MTI2ODEsImp0aSI6InlvdUBleGFtcGxlLmNvbSJ9.I6JzMLv2Ijol5WnMeeOPttPR5QcnQv1DrHNtKWW-87nwuLJQXgIHLlIw7C6SyvCcurLUBFnZOSz_0tuEMLQv1_Uzw9W6vQoHTem2dM83nrY1n0aAp7dyDK-2X8oYjPGu3IOkNtqfntt_jftaCozY9wQtmGO3RsWygdZNT_1Bg1q66KgalnjCaXYE4zVLTLYGWeEzlUNxjpHkwbRrlPMVOT5qiTA6Rp9rYTF3NTw4UpHNnpJlXDyAuyzKV0uGQv5gP9SPvw-tDJLLEcwkIaKfdmCO8ermfBBPbAiZzeJCMxVjqDzlvJnME1q6I9OdO7pBH43WaW0Cr7tEBb5wfz6zQQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{admin_access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Faculty of Engineering\",\n  \"description\": \"Engineering and technology programs\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}api/v1/faculties",
+              "host": [
+                "{{base_url}}api"
+              ],
+              "path": [
+                "v1",
+                "faculties"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "View Faculties",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJraWQiOiIwYmY2YmVmZi0yZWNjLTQ0NmUtOTZjYy05NGUzMTAzMWVmN2UiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ5b3VAZXhhbXBsZS5jb20iLCJhdWQiOlsiTmV4dEpzIiwiQW5kcm9pZCIsIklPUyJdLCJyb2xlIjoiVVNFUiBBRE1JTiBGQUNUT1JfUEFTU1dPUkQiLCJzY29wZSI6IlVTRVIgQURNSU4gRkFDVE9SX1BBU1NXT1JEIiwiaXNzIjoidGFza2Zsb3ctYXBpIiwiZXhwIjoxNzcwNjEzMjgxLCJpYXQiOjE3NzA2MTI2ODEsImp0aSI6InlvdUBleGFtcGxlLmNvbSJ9.I6JzMLv2Ijol5WnMeeOPttPR5QcnQv1DrHNtKWW-87nwuLJQXgIHLlIw7C6SyvCcurLUBFnZOSz_0tuEMLQv1_Uzw9W6vQoHTem2dM83nrY1n0aAp7dyDK-2X8oYjPGu3IOkNtqfntt_jftaCozY9wQtmGO3RsWygdZNT_1Bg1q66KgalnjCaXYE4zVLTLYGWeEzlUNxjpHkwbRrlPMVOT5qiTA6Rp9rYTF3NTw4UpHNnpJlXDyAuyzKV0uGQv5gP9SPvw-tDJLLEcwkIaKfdmCO8ermfBBPbAiZzeJCMxVjqDzlvJnME1q6I9OdO7pBH43WaW0Cr7tEBb5wfz6zQQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}api/v1/faculties",
+              "host": [
+                "{{base_url}}api"
+              ],
+              "path": [
+                "v1",
+                "faculties"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Faculty",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJraWQiOiIwYmY2YmVmZi0yZWNjLTQ0NmUtOTZjYy05NGUzMTAzMWVmN2UiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ5b3VAZXhhbXBsZS5jb20iLCJhdWQiOlsiTmV4dEpzIiwiQW5kcm9pZCIsIklPUyJdLCJyb2xlIjoiVVNFUiBBRE1JTiBGQUNUT1JfUEFTU1dPUkQiLCJzY29wZSI6IlVTRVIgQURNSU4gRkFDVE9SX1BBU1NXT1JEIiwiaXNzIjoidGFza2Zsb3ctYXBpIiwiZXhwIjoxNzcwNjEzMjgxLCJpYXQiOjE3NzA2MTI2ODEsImp0aSI6InlvdUBleGFtcGxlLmNvbSJ9.I6JzMLv2Ijol5WnMeeOPttPR5QcnQv1DrHNtKWW-87nwuLJQXgIHLlIw7C6SyvCcurLUBFnZOSz_0tuEMLQv1_Uzw9W6vQoHTem2dM83nrY1n0aAp7dyDK-2X8oYjPGu3IOkNtqfntt_jftaCozY9wQtmGO3RsWygdZNT_1Bg1q66KgalnjCaXYE4zVLTLYGWeEzlUNxjpHkwbRrlPMVOT5qiTA6Rp9rYTF3NTw4UpHNnpJlXDyAuyzKV0uGQv5gP9SPvw-tDJLLEcwkIaKfdmCO8ermfBBPbAiZzeJCMxVjqDzlvJnME1q6I9OdO7pBH43WaW0Cr7tEBb5wfz6zQQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Faculty of Engineering\",\n  \"description\": \"Engineering and technology programs bbl,l,\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}api/v1/faculties/3a1328e3-21e2-4b7e-86b0-e7c64ed7cc57",
+              "host": [
+                "{{base_url}}api"
+              ],
+              "path": [
+                "v1",
+                "faculties",
+                "3a1328e3-21e2-4b7e-86b0-e7c64ed7cc57"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Faculty",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJraWQiOiIwYmY2YmVmZi0yZWNjLTQ0NmUtOTZjYy05NGUzMTAzMWVmN2UiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ5b3VAZXhhbXBsZS5jb20iLCJhdWQiOlsiTmV4dEpzIiwiQW5kcm9pZCIsIklPUyJdLCJyb2xlIjoiVVNFUiBBRE1JTiBGQUNUT1JfUEFTU1dPUkQiLCJzY29wZSI6IlVTRVIgQURNSU4gRkFDVE9SX1BBU1NXT1JEIiwiaXNzIjoidGFza2Zsb3ctYXBpIiwiZXhwIjoxNzcwNjEzMjgxLCJpYXQiOjE3NzA2MTI2ODEsImp0aSI6InlvdUBleGFtcGxlLmNvbSJ9.I6JzMLv2Ijol5WnMeeOPttPR5QcnQv1DrHNtKWW-87nwuLJQXgIHLlIw7C6SyvCcurLUBFnZOSz_0tuEMLQv1_Uzw9W6vQoHTem2dM83nrY1n0aAp7dyDK-2X8oYjPGu3IOkNtqfntt_jftaCozY9wQtmGO3RsWygdZNT_1Bg1q66KgalnjCaXYE4zVLTLYGWeEzlUNxjpHkwbRrlPMVOT5qiTA6Rp9rYTF3NTw4UpHNnpJlXDyAuyzKV0uGQv5gP9SPvw-tDJLLEcwkIaKfdmCO8ermfBBPbAiZzeJCMxVjqDzlvJnME1q6I9OdO7pBH43WaW0Cr7tEBb5wfz6zQQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/v1/faculties/ebafce34-05ba-4cf2-b083-07fe43a58806",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "faculties",
+                "ebafce34-05ba-4cf2-b083-07fe43a58806"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Program",
+      "item": [
+        {
+          "name": "Get Program",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Program",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Program",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
