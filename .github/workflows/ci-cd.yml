@@ -43,5 +43,7 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_API_KEY }}
         run: |
-          # Use the service name and specify the project via environment variable
-          railway redeploy --service next-step-edu-backend --image ghcr.io/${{ secrets.GHCR_USERNAME }}/next-step-edu-backend:latest --project 65638b8c-872e-422d-bf62-c2761f3d2441
+          railway up --service next-step-edu-backend \
+            --image ghcr.io/${{ secrets.GHCR_USERNAME }}/next-step-edu-backend:latest \
+            --project 65638b8c-872e-422d-bf62-c2761f3d2441 \
+            --detach
