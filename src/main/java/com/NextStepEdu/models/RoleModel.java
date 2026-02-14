@@ -27,6 +27,6 @@ public class RoleModel implements GrantedAuthority {
 
     @Override
     public  String getAuthority() {
-        return name;
+        return "ROLE_" + name;
     }
 }
