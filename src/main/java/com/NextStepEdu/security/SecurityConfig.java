@@ -18,6 +18,8 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 
 @Configuration
 @EnableWebSecurity
@@ -55,22 +57,54 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/auth/**").permitAll()
                 .requestMatchers("/api/v1/cloud/upload/**").permitAll()
 
-                .requestMatchers("/api/v1/applicants/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/applicants", "/api/v1/applicants/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/applicants/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/applicants/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/applicants/**").hasRole("ADMIN")
 
-                .requestMatchers(HttpMethod.GET,"/api/v1/universities/**","/api/v1/university-contacts").permitAll()
-                .requestMatchers(HttpMethod.GET,"/api/v1/university-contacts/**","/api/v1/university-contacts").permitAll()
-                .requestMatchers(HttpMethod.GET,"/api/v1/faculties/**","/api/v1/faculties").permitAll()
-                .requestMatchers(HttpMethod.GET,"/api/v1/programs/**","/api/v1/programs").permitAll()
-                .requestMatchers(HttpMethod.GET,"/api/v1/scholarship-contact/**","/api/v1/scholarship-contact").permitAll()
-                .requestMatchers(HttpMethod.GET,"/api/v1/scholarship-contact/**","/api/v1/scholarship-contact").permitAll()
-                .requestMatchers(HttpMethod.GET,"/api/v1/scholarship/**", "/api/v1/scholarship").permitAll()
-                .requestMatchers(HttpMethod.GET,"/api/v1/scholarship/**", "/api/v1/scholarship/**").permitAll()
+
+
+                .requestMatchers(HttpMethod.GET, "/api/v1/universities/**", "/api/v1/university-contacts").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/university-contacts/**").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/university-contacts/**").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/university-contacts/**").hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/api/v1/university-contacts/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/university-contacts/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/university-contacts/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/university-contacts/**").hasRole("ADMIN")
+
+
+                .requestMatchers(HttpMethod.GET, "/api/v1/faculties/**", "/api/v1/faculties").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/faculties/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/faculties/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/faculties/**").hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/api/v1/programs/**", "/api/v1/programs").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/programs/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/programs/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/programs/**").hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/api/v1/scholarship-contact/**", "/api/v1/scholarship-contact").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/scholarship-contact/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/scholarship-contact/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/scholarship-contact/**").hasRole("ADMIN")
+
+
+                .requestMatchers(HttpMethod.GET, "/api/v1/scholarship/**", "/api/v1/scholarship").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/scholarship/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/scholarship/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/scholarship/**").hasRole("ADMIN")
+
+
 
                 .requestMatchers("/api/v1/profile/**").hasRole("ADMIN")
                 .anyRequest().hasRole("ADMIN"));
 
         http.oauth2ResourceServer(oauth2 -> oauth2
-                .jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder)));
+                .jwt(jwtConfigurer -> jwtConfigurer
+                        .decoder(jwtDecoder)
+                        .jwtAuthenticationConverter(jwtAuthenticationConverter())));
         http.csrf(csrf -> csrf.disable());
 
         http.sessionManagement(session -> session
@@ -78,6 +112,17 @@ public class SecurityConfig {
         http.cors(cors -> cors.configure(http));
 
         return http.build();
+    }
+
+    @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        grantedAuthoritiesConverter.setAuthoritiesClaimName("role");
+        grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
+
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+        return jwtAuthenticationConverter;
     }
 
 }
